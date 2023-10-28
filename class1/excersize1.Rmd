@@ -1,0 +1,50 @@
+---
+title: "تمرین جلسه اول"
+author: "فواد اسماعیلی"
+date: "$`r Sys.Date()`$"
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    toc: true
+header-includes:
+  - \usepackage{hyperref}
+  - \usepackage{bidi}
+  - \usepackage{xepersian}
+  - \settextfont[Scale=1.3]{Arial}
+  - \setlatintextfont[Scale = 1.2]{Arial}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RTLknitr)
+markdown_rtl()
+```
+
+# معرفی داده
+
+داده‌های ارائه شده در این تمرین، از سایت
+[worldometers](https://www.worldometers.info/world-population/population-by-country/)
+گرفته شده است، که آخرین آمار جمعیتی سازمان ملل متحد نسبت به هر کشور را ارائه کرده است.
+
+# فراخوانی داده‌ها
+فایل داده ها را از آدرس گیتهاب دانلود کرده و به صورت زیر فراخوانی کنید.
+```{r}
+load("world-data.Rdata")
+```
+در آن سه شئ زیر در دسترس هستند.
+که شش مشاهده اول هر یک نمایش داده شده است.
+```{r}
+head(Country)
+head(Migrants)
+head(Population)
+```
+
+# سوالات
+## سوال اول:
+چه کشور هایی بیشترین مهاجر پذیری را دارند؟
+
+## سوال دوم
+از چه کشورهایی بیشترین مهاجرت ها صورت می‌گیرد؟
+
+## سوال سوم
+آیا کشوری در سال 2023 هست که نه مهاجر پذیرفته باشد و نه کسی از آن مهاجرت کرده باشد؟
