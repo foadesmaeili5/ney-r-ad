@@ -1,5 +1,6 @@
 ---
-author: "فواد اسماعیلی و بچه های کلاس"
+title: "فارسی نویسی در محیط آرمارکدان"
+author: "فواد اسماعیلی"
 output:
   bookdown::pdf_document2:
     latex_engine: xelatex
@@ -8,8 +9,8 @@ header-includes:
   - \usepackage{hyperref}
   - \usepackage{bidi}
   - \usepackage{xepersian}
-  - \settextfont{Arial}
-  - \setlatintextfont{Arial}
+  - \settextfont[Scale = 1.3]{B Nazanin}
+  - \setlatintextfont[Scale=1.2]{Arial}
 ---
 
 ```{r setup, include=FALSE}
@@ -17,6 +18,27 @@ knitr::opts_chunk$set(echo = TRUE)
 library(RTLknitr)
 markdown_rtl()
 ```
+
+# معرفی بسته:
+زبان برنامه نویسی 
+\lr{R}
+با استفاده از بسته هایی نظیر
+\lr{rmarkdown,bookdown,knitr,Rsweave}
+به ما امکان ایجاد متن های پویا را می‌دهد، که در گزارش نویسی کار ما را بسیار بسیار ساده تر از پیش کرده است.
+
+اما نکته ای که وجود دارد این است که، فارسی نویسی با توجه به اینکه از سمت راست انجام می‌شود، مشکلاتی را برای ما فراهم می‌کند.
+
+بسته
+\lr{RTLknitr}
+ایجاد شده است تا تنظیمات مورد نیاز برای 
+\lr{Rmarkdown}
+و
+\lr{Rsweave}
+را برای زبان فارسی فراهم کند.
+امید است که مورد استفاده دوستان و همکاران قرار گرفته و با استفاده از آن گزارش های خود را در سریع ترین زمان ممکن، و ساده ترین حالت ممکن ارائه دهند.
+
+با تشکر
+فواد اسماعیلی\LTRfootnote{\lr{foadesmaeili5@gmail.com}}
 
 # نصب بسته 
 ```{r,eval=FALSE}
@@ -28,19 +50,26 @@ remotes::install_github("FoadEsmaeili5/RTLknitr")
 را در به جای 
 \lr{header}
 خود مارکدان قرار می‌دهیم،
-تا تنظیمات فارسی نویسی اعمال شود.
+تا تنظیمات 
+و بسته های پیش نیاز برای
+فارسی نویسی فراخوانی شوند.
 
-
-```{r,echo = TRUE,eval =TRUE}
+```{r,echo = TRUE,eval =TRUE,comment=""}
 library(RTLknitr)
 markdown_rtl_header()
 ```
 
 و نکته دیگر آنکه در اولین چانک
-تابع زیر را حتما حتما فراخوانی کنید.
-
+تابع زیر را حتما فراخوانی کنید.
+تا تنظیمات راست به چین خروجی مارکدان تنظیم شود.
 ```{r,eval = FALSE}
 markdown_rtl()
 ```
 
+برای نوشتن متن های انگلیسی و ریاضی و
+$\ldots$
+از دستورات لاتک استفاده کنید،
 
+برای بخش بندی و فهرست بندی و
+$\ldots$
+می‌توانید از دستورات مارکدان و یا لاتک استفاده کنید.
