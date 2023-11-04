@@ -1,5 +1,5 @@
 ---
-title: "تمرین جلسه اول"
+title: "حل تمرین جلسه اول"
 author: "فواد اسماعیلی"
 date: "$`r Sys.Date()`$"
 output:
@@ -19,6 +19,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(RTLknitr)
 markdown_rtl()
 ```
+
+(این جزوه با استفاده از بسته های
+\lr{knitr,rmarkdown,RTLknitr}
+نوشته شده است.
+)
 
 # معرفی داده
 
@@ -48,3 +53,50 @@ head(Population)
 
 ## سوال سوم
 آیا کشوری در سال 2023 هست که نه مهاجر پذیرفته باشد و نه کسی از آن مهاجرت کرده باشد؟
+
+# حل سوالات:
+## پیش پردازش داده
+از آنجایی که داده ها متاسفانه ساختار عددی ندارند، و به صورت رشته ذخیره شده اند، همچنین اعداد بین خود علامت
+','
+دارند، که یک داده اضافی است و باید آن را حذف کنیم، نیاز داریم تا این مراحل انجام شوند.
+
+با استفاده از تابع
+gsub
+می‌توانیم ویرگول ها را برداریم.
+```{r}
+migrants <- gsub(",","",Migrants)
+head(migrants)
+population <- gsub(",","",Population)
+head(population)
+```
+بعد از براشتن ویرگول ها، حال می‌توانیم اعدادی که به صورت رشته هستند را به عددی تبدیل کنیم
+
+```{r}
+migrants <- as.numeric(migrants)
+head(migrants)
+population <- as.numeric(population)
+head(population)
+```
+
+حال می‌توان به سوالات پاسخ داد.
+
+## سوال اول
+
+دستور زیر ده کشوری که بیشترین مهاجرت پذیری را داشته اند، را نشان می‌دهد.
+
+```{r}
+mig <- migrants[order(migrants,decreasing = TRUE)]
+co <- Country[order(migrants,decreasing = TRUE)]
+mig_co_mat <- cbind(mig,co)
+head(mig_co_mat,10)
+```
+دستوری زیر ده کشوری که بیشترین مهاجرت از آنها صورت پذیرفته را نشان می‌دهد.
+```{r}
+tail(mig_co_mat,10)
+```
+کشوری هایی با مهاجرت پذیری و خروج مهاجر برابر صفر عبارتند از:
+
+```{r}
+Country[migrants==0]
+```
+

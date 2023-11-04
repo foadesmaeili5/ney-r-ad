@@ -1,0 +1,46 @@
+---
+author: "فواد اسماعیلی و بچه های کلاس"
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    toc: true
+header-includes:
+  - \usepackage{hyperref}
+  - \usepackage{bidi}
+  - \usepackage{xepersian}
+  - \settextfont{Arial}
+  - \setlatintextfont{Arial}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RTLknitr)
+markdown_rtl()
+```
+
+# نصب بسته 
+```{r,eval=FALSE}
+remotes::install_github("FoadEsmaeili5/RTLknitr")
+```
+
+با استفاده از تابع زیر، بخش 
+\lr{header}
+را در به جای 
+\lr{header}
+خود مارکدان قرار می‌دهیم،
+تا تنظیمات فارسی نویسی اعمال شود.
+
+
+```{r,echo = TRUE,eval =TRUE}
+library(RTLknitr)
+markdown_rtl_header()
+```
+
+و نکته دیگر آنکه در اولین چانک
+تابع زیر را حتما حتما فراخوانی کنید.
+
+```{r,eval = FALSE}
+markdown_rtl()
+```
+
+

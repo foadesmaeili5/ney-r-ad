@@ -1,0 +1,195 @@
+---
+title: "برنامه نویسی زبان R"
+author: "فواد اسماعیلی و بچه های کلاس"
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    toc: true
+header-includes:
+  - \usepackage{hyperref}
+  - \usepackage{bidi}
+  - \usepackage{xepersian}
+  - \settextfont{Arial}
+  - \setlatintextfont{Arial}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RTLknitr)
+markdown_rtl()
+```
+
+# بردار
+جزوه ای است که توسط بچه ها قرار است آماده شود.
+
+# ماتریس
+برای تعریف به روشهای زیر می‌توان عمل کرد.
+
+
+```{r}
+x <- matrix(c(1,2,3,4,5,6),nrow = 3,ncol = 4,byrow = TRUE)
+x
+```
+آرگومان های آن
+ورودی اول بردار درایه ها.
+
+- \lr{nrow}: تعداد سطر
+- \lr{ncol}: تعداد سطون
+- \lr{byrow}: نحوه پر کردن درایه ها را در ماتریس بیان می‌کند.
+
+ویژگی های ماتریس
+```{r}
+dim(x)
+```
+
+```{r}
+diag(x)
+```
+```{r}
+diag(3)
+```
+
+```{r}
+diag(c(1,2))
+```
+تمرین:
+ماتریسی که قطر اصلی ان
+(1,2,3,4,5)
+و سایر درایه های آن برابر منفی یک است.
+
+```{r}
+x1 <- matrix(-.5,nrow = 5,ncol = 5)# ;x1
+diag(x1) <- 1:5 # c(1,2,3,4,5)
+x1
+```
+
+
+
+```{r}
+x2 <- x1
+diag(x2) <- 0
+x2 <- abs(x2)
+x2
+sum(diag(x1))
+sum(x2)
+```
+انتخاب زیر ماتریس
+
+```{r}
+x1[c(2,3),c(2,3)]
+```
+مقدار دهی زیر ماتریس:
+```{r}
+x1[c(2,3),c(2,3)] <- 150L
+x1
+```
+```{r}
+2 * x1
+```
+```{r}
+x1 * x2
+```
+
+```{r}
+x1 %*% x2
+```
+```{r}
+solve(matrix(rnorm(9),nrow = 3))
+```
+ویژگی نام سطر ها و سطون از دیگر ویژگی های ماتریس در 
+\lr{R}
+است.
+```{r}
+rownames(x1)
+colnames(x1)
+```
+
+```{r}
+x <- matrix(rnorm(9),nrow = 3);x
+t(x)
+```
+
+توابع خانواده 
+\lr{apply}
+در ماتریس
+
+```{r}
+colMeans(x1)
+```
+
+```{r}
+colSums(x1)
+rowSums(x1)
+```
+
+انحراف معیار سطونی
+```{r}
+apply(x1,2,sd)
+```
+انحراف معیار سطری
+```{r}
+apply(x1,1,sd)
+```
+sd/mean
+
+```{r}
+apply(x,2,sd)/colMeans(x)
+```
+
+```{r}
+apply(x,2,function(y){sd(y)/mean(y)})
+```
+# آرایه
+
+```{r}
+x_ar <- array(1:27,dim = c(3,3,3))
+x_ar
+```
+
+
+```{r}
+colSums(x_ar)
+```
+
+در خانواده 
+\lr{apply}
+آرایه تبدیل به ماتریس می‌شود و سپس محاسبات صورت میگیرد.
+```{r}
+apply(x_ar,1,sd)
+```
+
+انتخاب بخشی از آرایه
+```{r}
+diag(x_ar[,,1])
+diag(x_ar[,,2])
+diag(x_ar[,,3])
+```
+
+```{r}
+for(i in c(1,2,3)) {
+  print(diag(x_ar[,,i]))
+}
+```
+
+# \lr{factor}
+
+```{r}
+x_f <- factor(c("a","a","b","c","a"));x_f
+```
+
+```{r}
+ factor(x_f, labels = c("10%", "20%", "30%"))
+```
+
+از تابع زیر برای زمانی که میخواهیم، داده های پیوسته را به گسسته تبدیل کنیم(سطح بندی کنیم).
+```{r}
+x <- c(20,22,24,80,55,8,13,18)
+```
+```{r}
+cut(x,4)
+```
+
+
+
+
