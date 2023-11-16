@@ -1,0 +1,145 @@
+---
+title: "جلسه سوم"
+author: "foad"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    css: "cssFile.css"
+    fig_caption: yes
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# دیتا فریم
+در ماتریس داده ها یک نوع باید باشند، بنابراین نیاز است تا داده هایی که شامل سطون هایی با نوع های متفاوت هستند را در کنار هم قرار بدهیم، برای اینکار از دیتا فریم استفاده می‌کنیم.
+
+```{r}
+data.frame(x = c(1,2,3),y = c("a","b","c"))
+```
+```{r}
+mat <- matrix(1:9,nrow = 3)
+colnames(mat) <- c("a","b","c")
+as.data.frame(mat)
+```
+```{r}
+mat <- matrix(1:9,nrow = 3)
+mat_df <- as.data.frame(mat)
+names(mat_df) <- c("a","b","c")
+mat_df
+```
+```{r}
+mat_df[,1]
+mat[,1]
+```
+نکته: اگر در یک ماتریس برای گرفتن زیر مجموعه به صورت برداری عمل کنیم، ماتریس به عنوان بردار در نظر گرفته شده و بعد خروجی آن داده می شود.
+```{r}
+mat[7]
+as.vector(mat)[7]
+```
+
+```{r}
+mat_df[3]
+```
+```{r}
+mat_df[2,3]
+mat_df[,3][2]
+```
+تفاوت این دو حالت زیر در نوع خروجی آنها است.
+
+```{r}
+mat_df[2]
+mat_df[,2]
+```
+
+```{r}
+apply(mat_df,1,sum)
+```
+حالت های مختلف زیر مجموعه گرفتن در دیتا فریم:
+```{r}
+print("$ sign")
+mat_df$a
+print("[,1]")
+mat_df[,1]
+print("[1]")
+mat_df[1]
+print("[[1]]")
+mat_df[[1]]
+print("with function")
+with(mat_df,mean(a)/sd(a))
+```
+
+گاهی لازم است که به تمامی متغیر های داخل یک دیتا فریم را به صورت باز شده از آن دسترسی  داشته باشیم
+برای اینکار از تابع 
+`attach`
+استفاده می‌کنیم.
+و سپس پس از محاسبات خود، به دلیل اینکه رم زیادی اشغال نشود، آن را با استفاده از 
+`detach`
+می‌بندیم.
+
+```{r,error=TRUE}
+mean(a)
+```
+```{r}
+attach(mat_df)
+mean(a)
+```
+```{r error=TRUE}
+detach(mat_df)
+mean(a)
+```
+# لیست
+
+```{r}
+x1 <- c(1,2,3)
+x2 <- c(1,2,3,4,5,6)
+x3 <- letters[1:10]
+my_lst <- list(x1,x2,x3)
+```
+
+```{r}
+my_lst[3]
+```
+
+```{r}
+my_lst[[3]]
+```
+```{r}
+names(my_lst) <- c("x1","x2","x3")
+my_lst$x3
+```
+```{r}
+my_lst$x4 <- matrix(1:9,nrow = 3)
+```
+
+
+```{r}
+my_lst$x4
+```
+
+```{r}
+my_lst$x5 <- iris
+```
+
+```{r}
+is.data.frame(my_lst$x5)
+```
+```{r}
+is.data.frame(iris)
+```
+
+```{r}
+is.matrix(iris)
+```
+
+```{r}
+is.list(iris)
+```
+```{r}
+with(my_lst,mean(x1))
+mean(my_lst$x1)
+```
+
+

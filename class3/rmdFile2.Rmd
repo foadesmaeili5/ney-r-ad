@@ -1,0 +1,117 @@
+---
+title: "جلسه سوم"
+author: "foad"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    css: "cssFile.css"
+    fig_caption: yes
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# تابع
+عملگری که به ازای هر مقدار ورودی را به یک خروجی می‌برد
+
+در R
+هر عملی که انجام می‌دهیم در واقع به نحوی یک تابع را فراخوانی می‌کنیم.
+
+
+```{r}
+4 * 5
+`*`(4,5)
+```
+```{r}
+`<-`(lst,c(1,2,3,4))
+lst
+```
+تعریف تابع توسط خود کاربر
+
+$$\frac{\bar{X}}{\sigma}$$
+
+```{r}
+x <- rnorm(10)
+mean(x)/sd(x)
+```
+```{r}
+my_func <- function(x) {
+  res <- mean(x)/sd(x)
+  return(res)
+}
+
+my_func(x)
+```
+
+
+
+# توابع خانواده apply
+
+- apply
+- sapply (simple apply)
+- lapply (list apply)
+- tapply ()
+- mapply (multi input apply)
+
+در کنار تابع 
+- by
+- aggregate
+
+
+زمانی که یک ماتریس را میخواهیم عملیات سطونی یا سطری اعمال کنیم.
+
+```{r}
+head(iris)
+```
+```{r}
+iris2 <- as.matrix(iris[1:4])
+head(iris2)
+```
+```{r}
+apply(iris2,1,sd) # row
+```
+```{r}
+apply(iris2,2,sd) # column
+```
+
+## sapply
+
+```{r}
+sapply(1:4,function(i){
+  mean(iris2[,i])/sd(iris2[,i])
+})
+```
+
+```{r}
+for(i in 1:4) {
+ print(mean(iris2[,i])/sd(iris2[,i]))
+}
+```
+ورودی اول تابع sapply
+یا بردار است، یا لیست
+
+```{r}
+sapply(iris[1:4],my_func)
+```
+```{r}
+lapply(iris[1:4],my_func)
+```
+```{r}
+tapply(iris$Sepal.Length,iris$Species,mean)
+```
+```{r}
+with(iris,tapply(Sepal.Length,Species,mean))
+```
+```{r}
+data("ais",package= "sn")
+```
+```{r}
+head(ais)
+```
+
+```{r}
+
+```
+

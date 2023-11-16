@@ -1,0 +1,58 @@
+h1{
+  direction: rtl;
+  font-size:50px;
+}
+h2{
+  direction: rtl;
+  font-size: 45px;
+}
+h3{
+  direction: rtl;
+  font-size: 40px;
+}
+h4{
+  direction: rtl;
+  font-size: 35px;
+}
+h5{
+  direction: rtl;
+  font-size: 30px;
+}
+h6{
+  direction: rtl;
+  font-size: 25px;
+}
+
+p{
+  font-size: 20px;
+  direction: rtl;
+}
+
+
+
+.bg-warning{
+  background-color: #F0F8FF;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.bg-code{
+  background-color: #FFF8DC;
+  border: 3px solid black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.caption{
+  direction: rtl;
+  text-align: center;
+}
+
+#TOC {
+  direction: rtl;
+  color: blue;
+}
+a {
+  color: red;
+  font-size: 20px;
+}
