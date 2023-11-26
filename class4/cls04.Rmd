@@ -1,0 +1,199 @@
+---
+title: "جلسه چهارم"
+author: "foad"
+output:
+  bookdown::html_document2:
+    css: "cssFile.css"
+    fig_caption: yes
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,eval=FALSE}
+install.packages("sn")
+```
+
+
+```{r}
+data("ais",package = "sn")
+head(ais)
+```
+
+$$S_{xy} = \sum(x - \bar{x})(y-\bar{y})$$
+
+```{r}
+# BMI = y
+# Hg = x
+x_xbar <- ais$Hg - mean(ais$Hg)
+y_ybar <- ais$BMI - mean(ais$BMI)
+sxy <- sum(x_xbar * y_ybar)
+sxy
+```
+
+$$S_{xx} = \sum(x-\bar{x})^2$$
+
+```{r}
+sum(ais$Hg - mean(ais$Hg))^2 # wrong
+s_xx <- sum((ais$Hg - mean(ais$Hg))^2);s_xx
+```
+```{r}
+sxy/s_xx # beta_1
+```
+
+$$\beta_1 = \frac{S_{xy}}{S_{xx}}$$
+
+```{r}
+beta_1 <- function(x,y) {
+  # sxy
+  x_xbar <- x - mean(x)
+  y_ybar <- y - mean(y)
+  sxy <- sum(x_xbar * y_ybar)
+  # sxx
+  sxx <- sum((x- mean(x))^2)
+  
+  #beta
+  beta <- sxy/sxx
+  return(beta)
+}
+```
+
+
+```{r}
+beta_1(ais$Hg,ais$BMI)
+```
+$$ax^2 + bx + c = 0$$
+$$\Delta = b^2 - 4ac$$
+$$x_1 = -b + \sqrt{\Delta}$$
+$$x_2 = -b - \sqrt{\Delta}$$
+$$-4x^2-3x +24 = 0$$
+
+```{r}
+a <- -4
+b <- -3
+c <- 24
+```
+
+```{r}
+del <- b^2 - 4*a*c
+x1 <- -b + sqrt(del)
+x1
+
+```
+
+```{r}
+x2 <- -b - sqrt(del)
+x2
+```
+```{r}
+parvas_function <- function(a,b,c){
+  del <- b^2 - 4*a*c
+  x1 <- -b + sqrt(del)
+  x2 <- -b - sqrt(del)
+  return(c(x1,x2))
+}
+```
+
+
+```{r}
+parvas_function(a,b,c)
+```
+
+## Apply family functions
+
+```{r}
+head(ais)
+```
+
+```{r}
+mean(ais$BMI[ais$sport == "B_Ball"])
+```
+```{r}
+mean(ais$Hg[ais$sex == "female"])
+```
+```{r}
+table(ais$sport) |> length()
+```
+length(x)
+x |> length()
+
+```{r}
+length(table(ais$sport))
+```
+```{r}
+unique(ais$sport) |> length()
+```
+```{r}
+tapply(ais$BMI,ais$sport,mean)
+```
+
+
+```{r}
+tapply(ais$BMI,ais$sex,mean)
+tapply(ais$Hg,ais$sex,mean)
+```
+```{r}
+by(ais$BMI,ais$sex,mean)
+```
+
+
+# فصل
+## بخش
+### زیر بخش
+#### زیر زیر بخش
+
+زمانی که میخواهیم دو متغیر یا بیشتر را در برابر یک یا چند متغیر دیگر تابعی را روی آنها محاسبه کنیم، از تابع 
+aggregate
+استفاده میکنیم
+
+```{r}
+aggregate(cbind(BMI,Hg,Fe,SSF)~sex+sport,FUN = mean,data = ais)
+```
+
+```{r}
+apply(ais[c(3,4,5,6)],2,function(x){sd(x)/mean(x)})
+```
+
+```{r}
+mean(ais$RCC)
+mean(ais$Hg)
+mean(ais$Hc)
+mean(ais$Fe)
+
+```
+
+```{r}
+apply(ais[c("RCC","Hg","Hc","Fe")],2,mean)
+```
+
+
+```{r}
+sapply(ais[c("RCC","Hg","Hc","Fe")],mean)
+```
+
+mean(ais$RCC)
+mean(ais$Hg)
+mean(ais$Hc)
+mean(ais$Fe)
+
+```{r}
+sapply(c("RCC","Hg","Hc","Fe"),function(x){mean(ais[[x]])})
+```
+```{r}
+xn <- c("RCC","Hg","Hc","Fe")
+for(i in xn){
+  print(mean(ais[[i]]))
+}
+```
+
+
+```{r}
+lapply(ais[c("RCC","Hg","Hc","Fe")],mean)
+```
+```{r}
+with(ais,mean(BMI))
+```
+
+
