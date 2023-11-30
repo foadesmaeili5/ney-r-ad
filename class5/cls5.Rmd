@@ -1,0 +1,288 @@
+---
+title: "جزوه درس برنامه نویسی"
+author: "فواد اسماعیلی"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    toc: false
+header-includes:
+  - \usepackage{hyperref}
+  - \usepackage{bidi}
+  - \usepackage{xepersian}
+  - \settextfont[Scale = 1.4]{Arial}
+  - \setlatintextfont{Arial}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RTLknitr)
+markdown_rtl()
+```
+
+تا وقتی ندانیم چه چیزی می‌خواهیم، هرگز نمی‌توانیم، برنامه آن را بنویسیم!
+
+بنابراین اول به صورت کاملا واضح آن چیزی که می‌خواهیم را بهتر است روی کاغذ برای خود تجسم کنیم.
+
+# شرط
+
+آیا فلان هست؟
+
+```{r,eval = FALSE}
+
+if(TRUE) {
+  #my code
+}
+if(FALSE) {
+  # my code does not run
+}
+if(x==2) {
+  
+} else if(x==3)
+```
+
+مثال: اعداد بخش پذیر بر $5$
+
+```{r}
+x<- 1234
+x_1 <- x%%10
+if(x_1 ==0 || x_1==5){
+  print("is")
+} else{
+  print("not")
+}
+```
+
+```{r}
+n<- 50
+nc <- seq_len(n)
+v<- 3
+for(i in nc) {
+  if(i %%v==0) {
+    print(i)
+  }
+}
+```
+
+```{r}
+my_f <- function(n,v) {
+  nc <- seq_len(n)
+  for(i in nc) {
+    if(i %%v==0) {
+      print(i)
+    }
+  }
+}
+my_f(40,5)
+```
+
+```{r}
+x <- c("a","b","jafar","ali")
+for(i in x) {
+  print(i)
+}
+```
+
+```{r}
+x <- 5
+if(x %%2 == 0 && x >2) {
+  print(FALSE)
+} else if(x %%3 == 0 && x>3) {
+  print(FALSE)
+} else if(x %%4 == 0 && x>4) {
+  print(FALSE)
+} else if(x %%5 == 0 && x>5) {
+  print(FALSE)
+} else{
+  print(TRUE)
+}
+```
+
+```{r}
+x <- 11
+for(i in 2:x) {
+  if(i == x) {
+    print(TRUE)
+  } else if(x %% i==0) {
+    print(FALSE)
+    break
+  }
+}
+```
+
+```{r}
+aval <- function(x) {
+  if(x<2) {
+    stop("x must be larger or equal to 2")
+  }
+  for(i in 2:x) {
+    if(i == x) {
+      return(TRUE)
+    } else if(x %% i==0) {
+      return(FALSE)
+    }
+  }
+}
+aval(54)
+```
+
+```{r}
+aval(55)
+aval(56)
+aval(57)
+aval(58)
+```
+
+```{r}
+!FALSE
+```
+
+من نمیدانم تا کجا ادامه دارد!
+
+```{r}
+i <- 54
+
+print(i)
+```
+
+```{r}
+upto_aval <- function(n) {
+  while(!aval(n)){
+    n <- n+1
+  }
+  return(n)
+}
+upto_aval(1000)
+```
+
+```{r}
+n <- 30
+for(i in 2:n) {
+  if(aval(i)) {
+    print(i)
+  }
+}
+```
+
+
+```{r}
+```
+
+
+```{r}
+n <- 10
+res_mat <- matrix(0,nrow =n,ncol = n)
+for(i in 1:n) {
+  for(j in 1:n) {
+    res_mat[i,j] <- i*j
+  }
+}
+res_mat
+```
+
+
+```{r}
+n <- 10
+res_mat <- matrix(0,nrow =n,ncol = n)
+for(i in 1:n) {
+  res_mat[i,] <- i*seq_len(n)
+}
+res_mat
+```
+```{r}
+print("*")
+print("**")
+print("***")
+
+print(rep("*",1))
+print(rep("*",2))
+print(rep("*",3))
+```
+
+```{r}
+for(i in 1:5) {
+  print(paste(rep("*",i),collapse = " "))
+}
+```
+```{r}
+n<- 5
+for(i in 1:n) {
+  print(paste(rep(c("*"," "),c(i,n-i)),collapse = " "))
+}
+```
+```{r}
+n<- 5
+for(i in 0:n) {
+  print(paste(rep(c(" ","*"," "),c(n-i,1+2*i,n-i)),collapse = " "))
+}
+```
+
+برنامه ای بنویسیم! که
+دو تا آرگومان داره
+از x شروع شود
+و تا y
+برود و به محضی که به عدد اول رسید چاپ کند و خارج شود.
+
+```{r}
+x <- 33
+y <- 50
+for(i in x:y) {
+  if(aval(i)){
+    print(i)
+    break
+  }
+}
+```
+
+
+```{r}
+my_f <- function(x,y) {
+  for(i in x:y) {
+    if(aval(i)){
+      return(i)
+    }
+  }
+  print("no value")
+}
+my_f(100004,100019)
+```
+mean(1:i)/sd(1:i)
+
+```{r}
+mean(1:2)/sd(1:2)
+mean(1:3)/sd(1:3)
+mean(1:4)/sd(1:4)
+mean(1:5)/sd(1:5)
+mean(1:6)/sd(1:6)
+```
+```{r}
+n <- 6
+for(i in 2:n) {
+  print(mean(1:i)/sd(1:i))
+}
+```
+```{r}
+n <- 20
+x <- rnorm(n)
+```
+
+$$\sum_{i=2}^{n} X_i$$
+$$X_i = mean(x[1:i])/sd(x[1:i])$$
+
+```{r}
+res <- c()
+for(i in 2:n) {
+  res[i-1] <- mean(x[1:i])/sd(x[1:i])
+}
+sum(res)
+```
+
+
+
+
+
+
+
+
+
+
