@@ -1,0 +1,214 @@
+---
+title: "حل التمرین کلاس برنامه نویسی"
+author: "فواد اسماعیلی"
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    toc: true
+header-includes:
+  - \usepackage{hyperref}
+  - \usepackage{bidi}
+  - \usepackage{xepersian}
+  - \settextfont{Arial}
+  - \setlatintextfont{Arial}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error=TRUE)
+library(RTLknitr)
+markdown_rtl()
+```
+
+# سوال اول
+
+```{r}
+for(i in 1:10){
+  for(j in 1:10) {
+    cat(i*j)
+    cat(" ")
+  }
+  cat("\n")
+}
+
+```
+
+```{r}
+m <- matrix(0,nrow = 10,ncol =10)
+for(i in 1:10){
+  for(j in 1:10) {
+    m[i,j] <- i*j
+  }
+}
+m
+```
+# سوال۲
+
+```{r}
+f <- function(day) {
+  if(as.numeric(day)>7){
+    stop("day of the weeks please!")
+  }
+  switch(day,
+       "1"="saturday",
+       "2"="sunday",
+       "3"="monday",
+       "4"="Tuesday",
+       "5"="Wednesday",
+       "6"="Thursday",
+       "7"="Friday"
+       )
+}
+f(10)
+```
+
+# سوال سوم
+
+```{r}
+N <- 30
+a <- 7
+set.seed(1)
+x <- rpois(n=N,lambda = 1)
+x
+```
+
+```{r}
+# n<- 1,2,3,4,5,6,..., N
+# x[1]>=a 1
+# x[1]+x[2]>=a 2
+# x[1]+x[2]+x[3]>=a 3
+# x[1]+x[2]+x[3]+x[4]>=a 4
+#...
+# x[1]+x[2]+x[3]+x[4]+...+x[N]
+
+
+a<- 7
+for(n in 1:N) {
+  s <- sum(x[1:n])
+  print(s)
+  if(s>=a){
+    print("----------")
+    print(n)
+    break
+  }
+}
+
+```
+```{r}
+cx <- cumsum(x)
+min(which(cx>=a))
+```
+# سوال چهارم
+
+```{r}
+aval <- function(x) {
+  if(x<2){
+    return(FALSE)
+  }
+  for(i in 2:x){
+    if(i == x) {
+      return(TRUE)
+    } else {
+      if(x%%i ==0) {
+        return(FALSE)
+      }
+    }
+  }
+}
+to_aval <- function(N) {
+  x <- c()
+  for(i in 1:N) {
+    if(aval(i)){
+      x <- c(x,i)
+    }
+  }
+  return(x)
+}
+to_aval(100)
+```
+
+# سوال پنجم
+
+```{r}
+x <- c(5,1,4,2,8)
+```
+
+```{r}
+# x[1] < x[2]
+# x[1] < x[3]
+# x[1] < x[4] <- swap the values x[1] <- x[4]; x[4]<- x[1]
+# x <- c(1,3,5,2,5,6,2)
+# x <- c(1,2,5,3,5,6,2)
+#
+x <- c(5,1,4,2,8)
+for(j in 1:N) {
+  for(i in 1:(length(x)-1)) {
+  if(x[i] > x[i+1]){
+    a <- x[i]
+    b <- x[i+1]
+    x[i] <- b
+    x[i+1] <- a
+  }
+  print(x)
+}
+}
+x
+```
+
+```{r}
+x <- c(1,2,3,4,5,1,5,2,5,2,2,3,1,2)
+x[x==2] <- 10
+f <- function(x) {
+  min(x)
+  max(x)
+  mean(x)
+  m <- which.max(table(x))
+  m <- as.numeric(names(m))
+  res <- list("min" = min(x),"max" = max(x),"mean"=mean(x),"mode"=m)
+  return(res)
+}
+f(x)
+```
+
+```{r}
+f <- function(x) {
+  f()
+}
+```
+
+```{r}
+# 5!
+# 5*4!
+# 5*4 * 3!
+# 5*4 * 3*2!
+# 5*4 * 3*2 * 1
+# 
+# 1! = 1
+# 0! = 1
+```
+
+```{r}
+factorial_1 <- function(x) {
+  if(x<2){
+    return(1)
+  }
+  x* factorial_1(x-1)
+}
+factorial_1(6)
+```
+```{r}
+f <- function(n) {
+  if(n<2) {
+    return(1)
+  }else {
+    r <- 2*f(n-1) + 3 * f(n-2)
+    return(r)
+  }
+}
+f(4)
+``` 
+
+a^
+
+
+
+
